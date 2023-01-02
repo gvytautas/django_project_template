@@ -14,5 +14,5 @@ def show_services(request):
 
 
 def show_orders(request):
-    orders = Order.objects.filter(vehicle__model__brand__startswith='Model').all()
+    orders = Order.objects.filter(vehicle__model__brand__startswith='Brand').all()
     return render(request, 'show_orders.html', context={'orders': orders})

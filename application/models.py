@@ -31,18 +31,29 @@ class Vehicle(models.Model):
 
 class Order(models.Model):
     date = models.DateField(null=False, blank=False)
-    total_price = models.FloatField(null=False, blank=False)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    order_detail = models
 
     def __str__(self):
         return f'{self.vehicle.win_number} ({self.total_price})'
 
+    @property
+    def total_price(self):
+        total_price = 0
+        order_detail = self.order_details.all()
+        for detail in order_detail:
+            total_price += detail.price * detail.quantity
+        return total_price
+
 
 class OrderDetail(models.Model):
     quantity = models.IntegerField(null=False, blank=False)
-    price = models.FloatField(null=False, blank=False)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, related_name='order_details', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.order.vehicle.model.brand}'
+
+    @property
+    def price(self):
+        return self.service.price

@@ -29,17 +29,20 @@
                     <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/show_services">Show Services</a>
+                    <a class="nav-link" href="{% url 'show_services' %}">Show Services</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'show_orders' %}">Show Orders</a>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="{% url 'logout' %}">Sign Out</a>
                 </li>
+                {% else %}
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="{% url 'login' %}">Sign In</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>
