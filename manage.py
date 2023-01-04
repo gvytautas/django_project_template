@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 """
--user model
--sign in
--sign out
--password reset
+-forms
+-sign up page
+-user account page
 """
 
 import os
@@ -12,7 +11,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_authentication.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project_template.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
